@@ -2,17 +2,6 @@ import * as THREE from 'three';
 import { gsap } from "gsap"
 const pointerCircle = document.createElement("div");
 
-// function LastFMGetAlbums() {
-//   var xmlHttp = new XMLHttpRequest();
-//   xmlHttp.open(
-//     "GET",
-//     "https://lastfm-embed.vercel.app/api/top-albums?user=soilad&lang=en&theme=default&borderSize=0&borderRadius=0&showTitle=false&bgColor=%2300000000&textColor=%23fff&urlColor=%23ff0000&scrobbleColor=%23ffffff&limit=5&period=overall&layout=horizontal&itemsPerRow=5",
-//     false
-//   ); // false for synchronous request
-//   xmlHttp.send(null);
-//   return xmlHttp.responseText;
-// }
-
 function AddCardPointers() {
   pointerCircle.classList.add("pointerCircle");
   document.getElementById("overlay")?.appendChild(pointerCircle);
