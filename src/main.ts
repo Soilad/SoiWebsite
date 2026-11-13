@@ -13,8 +13,6 @@ function LastFMGetAlbums() {
   return xmlHttp.responseText;
 }
 
-console.log(LastFMGetAlbums());
-
 function AddCardPointers() {
   pointerCircle.classList.add("pointerCircle");
   document.getElementById("overlay")?.appendChild(pointerCircle);
