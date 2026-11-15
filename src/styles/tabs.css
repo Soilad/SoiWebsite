@@ -1,0 +1,59 @@
+.tabs {
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: stretch;
+  position: relative;
+  isolation: isolate;
+  color: var(--primary);
+
+  &::before {
+    content: '';
+    position: absolute;
+    /* AddTabHighlight (main.ts) sets these to the active tab's box; without them, fill .tabs */
+    left: var(--tab-left, 0px);
+    width: var(--tab-width, 100%);
+    top: 0;
+    height: 100%;
+    border-radius: 40px;
+    background-color: var(--tertiary);
+    box-shadow:
+            0 0 5px  oklch(from var(--secondary) l c h / 50%),
+      inset 0 0 10px oklch(from var(--tertiary-dark) l c h / 50%)
+    ;
+    transition: 
+      box-shadow 250ms,
+      left       200ms linear(0, 0.009 1.4%, 0.032 2.8%, 0.131 6%, 0.265 9.1%, 0.675 17.6%, 0.88 22.8%, 0.953 25.2%, 1.014 27.7%, 1.062 30.3%, 1.094 32.9%, 1.121 37.2%, 1.121 42.2%, 1.102 46.7%, 1.019 61.2%, 0.989 71.5%, 0.985 81.1%, 1),
+      top        200ms linear(0, 0.009 1.4%, 0.032 2.8%, 0.131 6%, 0.265 9.1%, 0.675 17.6%, 0.88 22.8%, 0.953 25.2%, 1.014 27.7%, 1.062 30.3%, 1.094 32.9%, 1.121 37.2%, 1.121 42.2%, 1.102 46.7%, 1.019 61.2%, 0.989 71.5%, 0.985 81.1%, 1),
+      width      200ms linear(0, 0.009 1.4%, 0.032 2.8%, 0.131 6%, 0.265 9.1%, 0.675 17.6%, 0.88 22.8%, 0.953 25.2%, 1.014 27.7%, 1.062 30.3%, 1.094 32.9%, 1.121 37.2%, 1.121 42.2%, 1.102 46.7%, 1.019 61.2%, 0.989 71.5%, 0.985 81.1%, 1),
+      height     200ms linear(0, 0.009 1.4%, 0.032 2.8%, 0.131 6%, 0.265 9.1%, 0.675 17.6%, 0.88 22.8%, 0.953 25.2%, 1.014 27.7%, 1.062 30.3%, 1.094 32.9%, 1.121 37.2%, 1.121 42.2%, 1.102 46.7%, 1.019 61.2%, 0.989 71.5%, 0.985 81.1%, 1)
+    ;
+    z-index: -1;
+  }
+  &:hover::before {
+    box-shadow:
+            0 0 10px oklch(from var(--secondary) l c h / 50%)
+    ;
+
+  }
+
+  & > * {
+    flex: 1; /* after all: unset, which would reset the flex: 1 from & > * */
+    display: flex;
+    justify-content: center; /* horizontal centre of content */
+    align-items: center;     /* vertical centre of content */
+    background-color: transparent;
+    border: none;
+    color: var(--primary);
+    font-size: 1.5em;
+    transition: text-shadow 1000ms linear(0, 0.053 0.5%, 0.238 1.1%, 1.46 3.6%, 1.62 4.2%, 1.673 4.8%, 1.637 5.3%, 1.512 5.9%, 0.689 8.4%, 0.582 9%, 0.547 9.6%, 0.571 10.1%, 0.656 10.7%, 1.21 13.2%, 1.282 13.8%, 1.305 14.4%, 1.288 14.9%, 1.231 15.5%, 0.858 18%, 0.81 18.6%, 0.795 19.1%, 0.802 19.6%, 0.829 20.1%, 1.08 22.6%, 1.124 23.3%, 1.138 23.9%, 1.133 24.4%, 1.115 24.9%, 0.946 27.4%, 0.916 28.1%, 0.907 28.7%, 0.923 29.7%, 1.037 32.2%, 1.063 33.5%, 1.047 34.7%, 0.971 37.2%, 0.958 38.3%, 0.968 39.5%, 1.02 42%, 1.028 43.1%, 0.981 47.9%, 1.013 52.7%, 0.991 57.5%, 1.006 62.3%, 0.996 67.1%, 1.003 71.8%, 1);
+
+    &::before {
+      all: unset;
+    }
+
+    &:hover {
+      text-shadow: 0 0 10px #f00;
+    }
+
+  }
+}

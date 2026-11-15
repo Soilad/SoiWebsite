@@ -1,0 +1,48 @@
+.gradientText {
+  background: linear-gradient(
+    135deg,
+    var(--secondary),
+    color-mix(var(--secondary), var(--tertiary-dark))
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.unHighlight {
+  position: relative;
+  /* Bar insets. GSAP (scroll.ts) tweens these: --right to 0% grows the bar
+     left to right, then --left to 100% slides it out to the right. */
+  --left: 0%;
+  --right: 100%;
+  width: fit-content;
+  &::before {
+    content: '';
+    border-radius: 5px;
+    position: absolute;
+    inset: 0 var(--right) 0 var(--left);
+    background-color: var(--secondary);
+    z-index: 1;
+  }
+}
+
+.landoText {
+  overflow: hidden;
+  position: relative;
+  * {
+    display: inline-block;
+    width: .9em;
+    transition:
+      translate 200ms linear,
+      width 200ms linear
+    ;
+    transition-delay: calc(100ms * (sibling-index() - 1) / sibling-count());
+    text-shadow: 0 1lh var(--secondary);
+  }
+  &:hover {
+    * {
+      display: inline-block;
+      translate: 0 -1lh;
+      width: 1em;
+    }
+  }
+}

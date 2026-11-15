@@ -1,0 +1,122 @@
+/* Registered so the face gradient colors can transition. */
+@property --face-from {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: transparent;
+}
+
+@property --face-to {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: transparent;
+}
+
+.skeuomorph1 {
+  --face-from: var(--tertiary-dark);
+  --face-to:   var(--tertiary-light);
+  transition:
+    --face-from 100ms linear,
+    --face-to   100ms linear,
+    padding     100ms linear
+  ;
+  position: relative;
+  border-radius: 30px;
+  padding: 10px;
+  font-size: 2em;
+  border-style: none;
+  box-shadow: inset 0 0 20px var(--tertiary-dark);
+  background-image:
+    linear-gradient(
+      0deg,
+      var(--face-from),
+      var(--face-to)
+    )
+  ;
+  color: white;
+
+  /* Pressing swaps the gradient colors; @property makes them animate. */
+  &:active {
+    padding: 9px;
+    --face-from: var(--tertiary-light);
+    --face-to:   var(--tertiary-dark);
+  }
+}
+
+/* Spinning gradient glow, shown only on hover and hidden while pressed.
+   Add next to .skeuomorph1 or .skeuomorph2. */
+.skeuomorph1-shadow {
+  /* isolation: isolate; */
+  &::before {
+    content: '';
+    position: absolute;
+    border-radius: 40px;
+    margin: auto;
+    padding: 5px;
+    inset: 4px;
+    background-image:
+    linear-gradient(
+      var(--tick),
+      var(--secondary),
+      var(--tertiary-dark)
+    );
+    filter: blur(5px);
+    animation: spin 3s linear infinite;
+    opacity: 0;
+    transition: inset 500ms, opacity 200ms;
+    z-index: -1;
+  }
+
+  &:hover::before {
+    inset: -4px;
+    padding: 2px;
+    opacity: 1;
+  }
+
+  /* After :hover so it wins (same specificity). */
+  &:active::before {
+    opacity: 0;
+  }
+}
+
+.skeuomorph2 {
+  --face-from: var(--tertiary-light);
+  --face-to:   var(--tertiary-dark);
+  transition:
+    --face-from 100ms linear,
+    --face-to   100ms linear,
+    box-shadow  100ms linear,
+    padding     100ms linear
+  ;
+  /* No isolation here: the z-index -1 glow from .skeuomorph1-shadow must
+     paint in the parent's stacking context to stay under this background. */
+  position: relative;
+  justify-content: center;
+  border-radius: 30px;
+  padding: 10px;
+  font-size: 2em;
+  border-style: none;
+  box-shadow:
+    var(--raised)        var(--raised)                var(--raised) oklch(from var(--tertiary-dark) l c h / 50%),
+    calc(var(--raised) * -1) calc(var(--raised) * -1) var(--raised) oklch(from var(--tertiary-light) l c h / 50%)
+  ;
+  background-image: linear-gradient(
+    135deg,
+    var(--face-from),
+    var(--face-to)
+  );
+  color: white;
+
+  /* Pressing swaps the gradient colors; @property makes them animate. */
+  &:active {
+    --face-from: var(--tertiary-dark);
+    --face-to:   var(--tertiary-light);
+  /* * { */
+  /*   opacity: 70%; */
+  /* } */
+    padding: 9px;
+    box-shadow:
+      inset calc(var(--raised) * -1) calc(var(--raised) * -1) var(--raised) oklch(from var(--tertiary-light) l c h / 50%),
+      inset var(--raised)        var(--raised)                var(--raised) oklch(from var(--tertiary-dark) l c h / 50%)
+    ;
+  }
+}

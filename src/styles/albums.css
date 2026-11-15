@@ -1,0 +1,33 @@
+#albums {
+  display: flex;
+  flex-wrap: wrap;
+  perspective: inherit;
+  transform-style: preserve-3d;
+  .albumContainer {
+    margin-left: -20px;
+    transform-style: preserve-3d;
+    display: block;
+    perspective: inherit;
+    width: fit-content;
+    img {
+      transition: transform 300ms, box-shadow 500ms;
+      transform:
+        rotateY(30deg)
+      ;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px var(--tertiary-dark);
+    }
+    &:hover{
+      img {
+        transform: 
+          rotateY(15deg)
+          translateX(-36px)
+          translateY(-20px)
+          translateZ(10px)
+          scale(110%)
+        ;
+        box-shadow: 0px 0px 10px var(--secondary);
+      }
+    }
+  }
+}

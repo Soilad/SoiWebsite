@@ -1,0 +1,76 @@
+.tiltCard {
+  justify-content: center;
+  transform: rotateX(0deg) rotateY(0deg);
+  perspective: inherit; /* Give card 3D depth for rotateX/rotateY */
+  opacity: 0; /* Hidden until GSAP fades it in (HeroScroll in main.ts) */
+  display: flex;
+}
+
+.cardContainer {
+  backdrop-filter: blur(10px);
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  perspective: inherit; /* Give card 3D depth for rotateX/rotateY */
+  /* &::before { */
+  /*   content: ''; */
+  /*   position: absolute; */
+  /*   inset: 0; */
+  /*   background-color: var(--secondary); */
+  /*   z-index: -5; */
+  /* } */
+  cursor: pointer;
+  transition: 
+    transform 500ms linear(0, 0.01 0.7%, 0.046 1.5%, 0.192 3.2%, 0.391 4.8%, 0.954 8.8%, 1.201 11%, 1.347 13%, 1.388 14%, 1.41 15.1%, 1.411 15.9%, 1.4 16.8%, 1.342 18.6%, 1.256 20.3%, 1.013 24.5%, 0.913 26.7%, 0.857 28.6%, 0.831 30.6%, 0.833 32.1%, 0.851 33.7%, 1.024 41.6%, 1.055 43.8%, 1.069 46%, 1.061 49.3%, 0.991 57.1%, 0.972 61.4%, 0.974 64.8%, 1.011 76.7%, 0.996 91.2%, 1),
+    backdrop-filter 100ms,
+    opacity 500ms linear;
+  flex: 1;
+  transform: rotateX(0deg) rotateY(0deg);
+  justify-content: flex-start;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 20px;
+  box-shadow: 
+    inset 0px 0px 20px var(--tertiary-dark),
+    inset 0px 0px 10px oklch(from var(--primary) l c h / calc(1 - var(--opacity))),
+          0px 0px 20px oklch(from var(--tertiary-dark) l c h / 50%)
+          ;
+  background-image: radial-gradient(
+    circle
+    at
+    top,
+    oklch(from var(--secondary) l c h / calc(1 - var(--opacity))),
+    oklch(from var(--tertiary-dark) l c h / calc(1 - var(--opacity)))
+    
+  );
+  border-radius: 20px;
+  opacity: 75%;
+  &:hover {
+    backdrop-filter: blur(15px);
+    opacity: 100%;
+  }
+}
+
+#pointerCircle {
+  transition: 
+    transform 100ms linear,
+    opacity 500ms linear;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width:  400px;
+  height: 400px;
+  background-image: radial-gradient(
+    oklch(from var(--secondary) l c h / calc((1 - var(--opacity)) / 2)),
+    transparent 50%
+  );
+  opacity: 0; /* Hidden until the cursor is over a .tiltCard */
+  pointer-events: none; /* Let the mouse reach the cards underneath */
+}
+
+.blankCard {
+  background-color: var(--tertiary);
+  border-radius: 20px;
+  padding: 10px;
+  margin:  10px;
+}
