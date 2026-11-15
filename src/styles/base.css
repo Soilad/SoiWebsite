@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "Soilad";
+  src: url("../assets/Soilad.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @property --tick {
   syntax: "<angle>";
   initial-value: 0deg;
@@ -23,11 +31,20 @@
 
 html,
 body {
+  font-family: "Soilad";
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
+}
+
+/* Form controls and buttons do not inherit the font by default. */
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
 }
 
 canvas {
