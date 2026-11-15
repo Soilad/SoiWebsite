@@ -19,7 +19,7 @@ export async function SetAlbums() {
 }
 
 export async function SetNowPlaying() {
-  const nowPlaying = await LFM_GetNowPlaying();
+  const nowPlaying: Record<string, any> = await LFM_GetNowPlaying();
   console.log(nowPlaying);
   const image = document.createElement("img");
   image.src = nowPlaying.imageSrc;
