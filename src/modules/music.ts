@@ -1,9 +1,9 @@
-import { LFM_GetNowPlaying, LFM_GetAlbums } from "../lastfm";
+import { LFM_GetNowPlaying, LFM_GetAlbums, RS_GetAlbums } from "../lastfm";
 
 export async function SetAlbums() {
   const albums = document.getElementById("albums");
-  console.log(await LFM_GetAlbums());
-  LFM_GetAlbums()
+  console.log(await RS_GetAlbums());
+  RS_GetAlbums()
     .then(
       a_albums =>
         a_albums.forEach(

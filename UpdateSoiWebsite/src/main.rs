@@ -3,6 +3,17 @@ use std::{error::Error, fs};
 use reqwest::{self, Client, Url};
 mod lastfm;
 use lastfm::{TopAlbums, TopAlbumsResponse};
+use serde::{Deserialize, Serialize};
+
+use crate::lastfm::TopAlbum;
+
+const IMAGE_SIZE: usize = 1;
+
+#[derive(Debug, Deserialize, Serialize)]
+struct Album {
+    imageSrc: String,
+    url: String,
+}
 
 async fn get_lastfm_albums() -> Result<TopAlbums, Box<dyn Error>> {
     let _ = dotenvy::from_path("../.dev.vars");
@@ -12,7 +23,6 @@ async fn get_lastfm_albums() -> Result<TopAlbums, Box<dyn Error>> {
         &[
             ("user", "soilad"),
             ("format", "json"),
-            ("limit", "1"),
             ("api_key", &LASTFM_API_KEY),
         ],
     )
@@ -25,9 +35,21 @@ async fn get_lastfm_albums() -> Result<TopAlbums, Box<dyn Error>> {
     // };
 }
 
+fn _format_albums(album: TopAlbum) -> Album {
+    Album {
+        imageSrc: album.image[IMAGE_SIZE].url.clone(),
+        url: album.url,
+    }
+}
+
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
-    let albums = get_lastfm_albums().await?;
+    let albums: Vec<Album> = get_lastfm_albums()
+        .await?
+        .album
+        .into_iter()
+        .map(_format_albums)
+        .collect();
     let args: Vec<String> = std::env::args().collect();
     fs::write(
         args.get(1).unwrap_or(&"./TopAlbums.json".to_string()),

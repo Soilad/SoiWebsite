@@ -1,8 +1,26 @@
 import { Presence } from "./interfaces/Presence";
 import { Album } from "./interfaces/Album";
 
+function _LFM_FormatAlbums(a_json: any) {
+  const albums = a_json.album;
+  return albums
+    .map(
+      (album: any) => {
+        return new Album(
+          album.image[1]?.["#text"],
+          album.url,
+        );
+      }
+    )
+    .filter(
+      (album: Album) => {
+        return album.imageSrc
+      }
+    );
+}
+
 export async function LFM_GetAlbums(): Promise<Album[]> {
-  return fetch(window.location.origin + "/api/get-albums")
+  return fetch(import.meta.env.BASE_URL + "data/top-albums.json")
     .then(
       response => {
         if (response.ok) {
@@ -10,26 +28,20 @@ export async function LFM_GetAlbums(): Promise<Album[]> {
         }
       }
     )
+    .then(_LFM_FormatAlbums)
+}
+
+export async function RS_GetAlbums() {
+  console.log(window.location.origin + "/TopAlbums.json");
+  return fetch(window.location.origin + "/TopAlbums.json")
     .then(
-      json => {
-        const albums = json.topalbums.album;
-        return albums
-          .map(
-            (album: any) => {
-              return new Album(
-                album.image[1]?.["#text"],
-                album.url,
-              );
-            }
-          )
-          .filter(
-            (album: Album) => {
-              return album.imageSrc
-            }
-          )
-          ;
+      response => {
+        if (response.ok) {
+          return response.json()
+        }
       }
     )
+    ;
 }
 
 export async function LFM_GetNowPlaying(): Promise<Presence> {
