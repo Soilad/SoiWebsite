@@ -2,7 +2,7 @@ use std::{error::Error, fs};
 
 use reqwest::{self, Client, Url};
 mod lastfm;
-use lastfm::{LastfmError, TopAlbums, TopAlbumsResponse};
+use lastfm::{TopAlbums, TopAlbumsResponse};
 use serde::{Deserialize, Serialize};
 
 use crate::lastfm::TopAlbum;
@@ -29,14 +29,7 @@ async fn get_lastfm_albums() -> Result<TopAlbums, Box<dyn Error>> {
     .unwrap();
     let client = Client::new();
     let response = client.get(url).send().await?.text().await?;
-    match serde_json::from_str::<TopAlbumsResponse>(&response) {
-        Ok(data) => Ok(data.topalbums),
-        Err(parse_err) => match serde_json::from_str::<LastfmError>(&response) {
-            // Last.fm sent an error body (bad key, rate limit, ...) instead of data
-            Ok(err) => Err(format!("Last.fm error {}: {}", err.error, err.message).into()),
-            Err(_) => Err(format!("Unexpected Last.fm response ({parse_err}): {response}").into()),
-        },
-    }
+    Ok(serde_json::from_str::<TopAlbumsResponse>(&response)?.topalbums)
     // if let Ok(response) = client.get(url).send().await?.text().await {
     //     serde_json::from_str(&response);
     // };
