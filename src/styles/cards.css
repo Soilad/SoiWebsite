@@ -10,7 +10,7 @@
   backdrop-filter: blur(10px);
   align-items: center;
   justify-content: center;
-  display: flex;
+  display: block;
   perspective: inherit; /* Give card 3D depth for rotateX/rotateY */
   /* &::before { */
   /*   content: ''; */
@@ -52,9 +52,9 @@
 }
 
 #pointerCircle {
-  transition: 
-    transform 100ms linear,
-    opacity 500ms linear;
+  /* transition:  */
+  /*   transform 100ms linear, */
+  /*   opacity 500ms linear; */
   position: absolute;
   top: 0;
   left: 0;

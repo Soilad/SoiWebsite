@@ -16,23 +16,29 @@
     height: 100%;
     border-radius: 40px;
     background-color: var(--tertiary);
+    border-top:    solid 1px oklch(from var(--secondary) l c h / 50%);
+    border-bottom: solid 1px oklch(from var(--secondary) l c h / 50%);
     box-shadow:
-            0 0 5px  oklch(from var(--secondary) l c h / 50%),
-      inset 0 0 10px oklch(from var(--tertiary-dark) l c h / 50%)
+            0 0 5px oklch(from var(--secondary) l c h / 50%),
+      inset 0 0 5px oklch(from var(--secondary) l c h / 50%)
     ;
     transition: 
       box-shadow 250ms,
       left       200ms linear(0, 0.009 1.4%, 0.032 2.8%, 0.131 6%, 0.265 9.1%, 0.675 17.6%, 0.88 22.8%, 0.953 25.2%, 1.014 27.7%, 1.062 30.3%, 1.094 32.9%, 1.121 37.2%, 1.121 42.2%, 1.102 46.7%, 1.019 61.2%, 0.989 71.5%, 0.985 81.1%, 1),
       top        200ms linear(0, 0.009 1.4%, 0.032 2.8%, 0.131 6%, 0.265 9.1%, 0.675 17.6%, 0.88 22.8%, 0.953 25.2%, 1.014 27.7%, 1.062 30.3%, 1.094 32.9%, 1.121 37.2%, 1.121 42.2%, 1.102 46.7%, 1.019 61.2%, 0.989 71.5%, 0.985 81.1%, 1),
       width      200ms linear(0, 0.009 1.4%, 0.032 2.8%, 0.131 6%, 0.265 9.1%, 0.675 17.6%, 0.88 22.8%, 0.953 25.2%, 1.014 27.7%, 1.062 30.3%, 1.094 32.9%, 1.121 37.2%, 1.121 42.2%, 1.102 46.7%, 1.019 61.2%, 0.989 71.5%, 0.985 81.1%, 1),
-      height     200ms linear(0, 0.009 1.4%, 0.032 2.8%, 0.131 6%, 0.265 9.1%, 0.675 17.6%, 0.88 22.8%, 0.953 25.2%, 1.014 27.7%, 1.062 30.3%, 1.094 32.9%, 1.121 37.2%, 1.121 42.2%, 1.102 46.7%, 1.019 61.2%, 0.989 71.5%, 0.985 81.1%, 1)
+      height     200ms linear(0, 0.009 1.4%, 0.032 2.8%, 0.131 6%, 0.265 9.1%, 0.675 17.6%, 0.88 22.8%, 0.953 25.2%, 1.014 27.7%, 1.062 30.3%, 1.094 32.9%, 1.121 37.2%, 1.121 42.2%, 1.102 46.7%, 1.019 61.2%, 0.989 71.5%, 0.985 81.1%, 1),
+      border     200ms linear(0, 0.009 1.4%, 0.032 2.8%, 0.131 6%, 0.265 9.1%, 0.675 17.6%, 0.88 22.8%, 0.953 25.2%, 1.014 27.7%, 1.062 30.3%, 1.094 32.9%, 1.121 37.2%, 1.121 42.2%, 1.102 46.7%, 1.019 61.2%, 0.989 71.5%, 0.985 81.1%, 1)
     ;
     z-index: -1;
   }
   &:hover::before {
     box-shadow:
-            0 0 10px oklch(from var(--secondary) l c h / 50%)
+            0 0 5px var(--secondary),
+      inset 0 0 5px oklch(from var(--secondary) l c h / 50%)
     ;
+    border-top:    solid 2px oklch(from var(--secondary) l c h / var(--opacity));
+    border-bottom: solid 2px oklch(from var(--secondary) l c h / var(--opacity));
 
   }
 

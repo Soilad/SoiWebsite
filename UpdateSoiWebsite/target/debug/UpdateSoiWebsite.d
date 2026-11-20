@@ -1,0 +1,1 @@
+/home/soilad/Projects/SoiWebsite/UpdateSoiWebsite/target/debug/UpdateSoiWebsite: /home/soilad/Projects/SoiWebsite/UpdateSoiWebsite/src/lastfm.rs /home/soilad/Projects/SoiWebsite/UpdateSoiWebsite/src/main.rs

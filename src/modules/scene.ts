@@ -3,6 +3,8 @@ import { gsap } from "gsap";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import modelUrl from "../Untitled.glb?url";
 
+const SPIN_SPEED = 0.5; // radians per second
+
 export function ThreeJS() {
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -63,7 +65,10 @@ export function ThreeJS() {
   camera.position.z = 5;
   function animate(time: number) {
     timer.update(time);
-    animationMixer?.update(timer.getDelta());
+    const delta = timer.getDelta();
+    animationMixer?.update(delta);
+    // Spin the pivot around its vertical axis, frame-rate independent
+    pivot.rotation.y += delta * SPIN_SPEED;
     renderer.render(scene, camera);
 
     // Grow while the cursor is over any part of the model

@@ -1,0 +1,5 @@
+/home/soilad/Projects/SoiWebsite/UpdateSoiWebsite/target/debug/deps/smallvec-7fa85133c6062224.d: /home/soilad/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/smallvec-1.16.6/src/lib.rs
+
+/home/soilad/Projects/SoiWebsite/UpdateSoiWebsite/target/debug/deps/libsmallvec-7fa85133c6062224.rmeta: /home/soilad/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/smallvec-1.16.6/src/lib.rs
+
+/home/soilad/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/smallvec-1.16.6/src/lib.rs:

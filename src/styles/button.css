@@ -12,12 +12,9 @@
 }
 
 .skeuomorph1 {
-  --face-from: var(--tertiary-dark);
-  --face-to:   var(--tertiary-light);
   transition:
-    --face-from 100ms linear,
-    --face-to   100ms linear,
-    padding     100ms linear
+    background-position 100ms linear,
+    padding             100ms linear
   ;
   position: relative;
   border-radius: 30px;
@@ -25,20 +22,24 @@
   font-size: 2em;
   border-style: none;
   box-shadow: inset 0 0 20px var(--tertiary-dark);
+  /* Image is 2x tall: bottom half = dark to light, top half = light to dark.
+     Pressing slides the image to show the other half. */
   background-image:
     linear-gradient(
       0deg,
-      var(--face-from),
-      var(--face-to)
+      var(--tertiary-light)  0%,
+      var(--tertiary-dark) 50%,
+      var(--tertiary-dark) 50%,
+      var(--tertiary-light)  100%
     )
   ;
+  background-size: 100% 200%;
+  background-position: 0 0;
   color: white;
 
-  /* Pressing swaps the gradient colors; @property makes them animate. */
   &:active {
     padding: 9px;
-    --face-from: var(--tertiary-light);
-    --face-to:   var(--tertiary-dark);
+    background-position: 0 100%;
   }
 }
 

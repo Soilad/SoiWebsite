@@ -6,9 +6,9 @@
   /* z-index: 2; */
   color: white;
   perspective: 500px; /* Give card 3D depth for rotateX/rotateY */
-  overflow-x: hidden; /* No horizontal scroll */
+  overflow: hidden; /* No horizontal scroll */
   overflow-y: scroll;
-  scroll-snap-type: y mandatory;
+  /* scroll-snap-type: y mandatory; /* Snap to sections on the scroller (#overlay) */
 }
 
 /* First screen: knockout text only. Not positioned, so mix-blend-mode still blends with the canvas. */
@@ -23,6 +23,7 @@
 /* Empty first screen inside the scroll container, so cards start below the fold */
 .heroSpacer {
   height: 100dvh;
+  scroll-snap-align: start;
 }
 
 .lastfm {
@@ -52,10 +53,9 @@
   --line-x: 50%; /* Horizontal position of the line */
   --gap: 80px;   /* Space between a card and the line */
   position: relative;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: calc(var(--gap) * 2);
-  row-gap: 32px;
+  display: flex;
+  flex-direction: column; /* One card per row */
+  gap: 32px;
   max-width: 900px;
   margin-inline: auto;
   padding: 40px 16px;
@@ -80,7 +80,8 @@
 
   > * {
     position: relative;
-    width: 100%;
+    scroll-snap-align: start;
+    width: calc(50% - var(--gap)); /* Half the timeline, minus the space next to the line */
     max-width: 800px;
 
     /* Dot on the line, level with the top of the card.
@@ -95,15 +96,12 @@
       background-color: var(--tertiary-dark);
     }
 
-    /* Auto-placement does not backfill, so each card gets its own row. */
     &:nth-child(odd) {
-      grid-column: 2;
-      justify-self: start;
+      align-self: flex-end;
       &::after { left: calc(-1 * var(--gap) - 9px); }
     }
     &:nth-child(even) {
-      grid-column: 1;
-      justify-self: end;
+      align-self: flex-start;
       &::after { right: calc(-1 * var(--gap) - 9px); }
     }
   }
@@ -111,14 +109,13 @@
   @media (width < 700px) {
     --line-x: 24px;
     --gap: 24px;
-    grid-template-columns: 1fr;
     padding-left: calc(var(--line-x) + var(--gap));
 
     > *,
     > *:nth-child(odd),
     > *:nth-child(even) {
-      grid-column: 1;
-      justify-self: stretch;
+      align-self: stretch;
+      width: auto;
       max-width: none;
       &::after {
         left: calc(-1 * var(--gap) - 9px);
@@ -154,7 +151,6 @@
     width: var(--radius);
     height: var(--radius);
     top: 100%;
-    backdrop-filter: blur(10px);
   }
 
 
