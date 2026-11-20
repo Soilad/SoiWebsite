@@ -32,8 +32,8 @@ export async function LFM_GetAlbums(): Promise<Album[]> {
 }
 
 export async function RS_GetAlbums() {
-  console.log(window.location.origin + "/TopAlbums.json");
-  return fetch(window.location.origin + "/TopAlbums.json")
+  console.log(import.meta.env.BASE_URL + "TopAlbums.json");
+  return fetch(import.meta.env.BASE_URL + "TopAlbums.json")
     .then(
       response => {
         if (response.ok) {

@@ -32,7 +32,7 @@ jobs:
         env:
           LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
         run: |
-          cargo run --release -- ../TopAlbums.json
+          cargo run --release -- ../public/TopAlbums.json
 
       - uses: actions/setup-node@v4
         with:
